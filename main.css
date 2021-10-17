@@ -1,4 +1,39 @@
-.video-player{
-    height: 100px;
-    width: 200px;
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #006653;
+    color: aliceblue;
+    font-family: 'Poppins', sans-serif;
+}
+
+main{
+    width: 1400px;
+    margin: 0 auto;
+    height: 75vh;
+}
+
+#user-streams {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+    gap: 1em;
+    height: 100%;
+}
+
+.video-containers {
+    
+}
+
+
+.video-player {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+
+@media screen and (max-width: 100px) {
+    main{
+        width: 95%;
+    }
 }

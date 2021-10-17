@@ -21,8 +21,8 @@ document.getElementById('join-btn').addEventListener('click', async() => {
 
 let joinStreams = async() => {
 
-    client.on("user-published", handleUserJoined)
-    client.on("user-left", handleUserLeft)
+    client.on("user-published", handleUserJoined);
+    client.on("user-left", handleUserLeft);
 
     [config.uid, localTracks.audioTrack, localTracks.videoTrack] = await Promise.all([
         client.join(config.appid, config.channel, config.token || null, config.uid || null),
