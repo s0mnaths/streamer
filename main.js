@@ -4,7 +4,7 @@ let config = {
     appid: '',
     token: '',
     uid: null,
-    channel: 'testing'
+    channel: ''
 }
 
 let localTracks = {
@@ -17,6 +17,19 @@ let remoteTracks = {}
 document.getElementById('join-btn').addEventListener('click', async() => {
     console.log('User Joined Stream')
     await joinStreams()
+})
+
+document.getElementById('leave-btn').addEventListener('click', async() => {
+    for(trackName in localTracks){
+        let track = localTracks[trackName]
+        if(trackName){
+            track.stop()
+            track.close()
+            localTracks[trackName] = null
+        }
+    }
+    await client.leave()
+    document.getElementById('user-streams').innerHTML = ''
 })
 
 let joinStreams = async() => {
@@ -41,8 +54,9 @@ let joinStreams = async() => {
     await client.publish([localTracks.audioTrack, localTracks.videoTrack])
 }
 
-let handleUserLeft = async() => {
-    console.log('User has Left')
+let handleUserLeft = async(user) => {
+    delete remoteTracks[user.uid]
+    document.getElementById(`video-wrapper-${user.uid}`)
 }
 
 let handleUserJoined = async(user, mediaType) => {
